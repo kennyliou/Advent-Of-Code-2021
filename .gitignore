@@ -1,0 +1,7 @@
+.idea
+.gradle
+gradle.properties
+gradlew.bat
+gradlew
+gradle
+src/main/resources/puzzle
