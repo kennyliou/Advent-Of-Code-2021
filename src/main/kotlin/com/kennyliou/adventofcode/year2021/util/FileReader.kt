@@ -38,6 +38,20 @@ object FileReader {
         return listOf()
     }
 
+    fun readFileLineAsListOfInts(fileName: String): List<List<Int>> {
+        val path = this::class.java.classLoader.getResource(fileName)
+        if (path != null) {
+            return File(path.file).useLines {
+                it.map { line ->
+                    line.toCharArray().map { c ->
+                        c.digitToInt()
+                    }.toList()
+                }.toList()
+            }
+        }
+        return mutableListOf<List<Int>>()
+    }
+
     fun readFileAsSevenSegmentDisplayData(fileName: String): List<SevenSegmentDisplay> {
         val path = this::class.java.classLoader.getResource(fileName)
         if (path != null) {
