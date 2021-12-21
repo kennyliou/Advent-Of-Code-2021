@@ -1,5 +1,6 @@
 package com.kennyliou.adventofcode.year2021.util
 
+import com.kennyliou.adventofcode.year2021.day8.SevenSegmentDisplay
 import java.io.File
 
 object FileReader {
@@ -32,6 +33,21 @@ object FileReader {
                 values?.map { value ->
                     value.toInt()
                 }?.toList() ?: listOf()
+            }
+        }
+        return listOf()
+    }
+
+    fun readFileAsSevenSegmentDisplayData(fileName: String): List<SevenSegmentDisplay> {
+        val path = this::class.java.classLoader.getResource(fileName)
+        if (path != null) {
+            return File(path.file).useLines {
+                it.map { line ->
+                    val data = line.split("|")
+                    val hints = data[0].trim().split(" ")
+                    val displays = data[1].trim().split(" ")
+                    SevenSegmentDisplay(hints, displays)
+                }.toList()
             }
         }
         return listOf()
