@@ -38,18 +38,18 @@ object FileReader {
         return listOf()
     }
 
-    fun readFileLineAsListOfInts(fileName: String): List<List<Int>> {
+    fun readFileLineAsListOfInts(fileName: String): MutableList<MutableList<Int>> {
         val path = this::class.java.classLoader.getResource(fileName)
         if (path != null) {
             return File(path.file).useLines {
                 it.map { line ->
                     line.toCharArray().map { c ->
                         c.digitToInt()
-                    }.toList()
-                }.toList()
+                    }.toMutableList()
+                }.toMutableList()
             }
         }
-        return mutableListOf<List<Int>>()
+        return mutableListOf<MutableList<Int>>()
     }
 
     fun readFileAsSevenSegmentDisplayData(fileName: String): List<SevenSegmentDisplay> {
